@@ -76,5 +76,5 @@ entities:
 
 ## 🙏 Inspired By
 This project was inspired by the following amazing works:
-*   [bar-card](https://github.com) - For the foundation of bar-based visualizations.
-*   [Frosted Glass Themes](https://github.com) - For the beautiful glass-morphism aesthetic.
+*   [bar-card](https://github.com/custom-cards/bar-card) - For the foundation of bar-based visualizations.
+*   [Frosted Glass Themes](https://github.com/wessamlauf/homeassistant-frosted-glass-themes) - For the beautiful glass-morphism aesthetic.
