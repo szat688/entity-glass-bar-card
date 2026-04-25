@@ -4,7 +4,7 @@ A sleek, vertical glass-tube style bar card for Home Assistant.
 
 This card was originally created for personal use to achieve a specific, clean aesthetic on my own dashboard. I decided to share it with the Home Assistant community, hoping that others will find it useful and enjoy the design as much as I do.
 
-![Preview](preview.png?v=0.15)
+![Preview](https://raw.githubusercontent.com/szat688/entity-glass-bar-card/refs/heads/main/preview.png)
 
 ---
 
