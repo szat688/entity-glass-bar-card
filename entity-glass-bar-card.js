@@ -1,5 +1,5 @@
 /**
- * EntityGlassBarCard - v0.14
+ * EntityGlassBarCard - v0.15
  * A vertical, glass-style bar card for Home Assistant
  * Features: Improved truncation math for value label clearance.
  */
@@ -67,26 +67,47 @@ class EntityGlassBarCard extends HTMLElement {
       const stateObj = hass.states[entityId];
       if (!stateObj) return;
 
-      const val = parseFloat(stateObj.state) || 0;
+      let val = parseFloat(stateObj.state);
+      
+      // If it's a light entity, use brightness attribute instead of state string ('on'/'off')
+      if (entityId.startsWith('light.')) {
+        const brightness = stateObj.attributes.brightness || 0;
+        val = Math.round((brightness / 255) * 100);
+      } else {
+        val = val || 0;
+      }
       const name = ent.name || stateObj.attributes.friendly_name || "Sensor";
       const deviceClass = stateObj.attributes.device_class;
-      const unit = stateObj.attributes.unit_of_measurement || "";
+      let unit = stateObj.attributes.unit_of_measurement || "";
+      if (entityId.startsWith('light.') && !unit) {
+        unit = "%";
+      }
       
       // 1. MIN/MAX AND PERCENTAGE
       let min = ent.min !== undefined ? ent.min : 0;
       let max = ent.max !== undefined ? ent.max : (deviceClass === 'temperature' ? 40 : 100);
-      let pct = Math.min(Math.max(((val - min) / (max - min)) * 100, 0), 100);
+      let pct = Math.min(Math.max(((val - min) / (max - min)) * 100, 0), 100); 
 
       // 2. COLOR LOGIC
       let color;
-      if (ent.color) color = ent.color;
+      
+      // Check for severity thresholds first
+      if (this._config.severity && Array.isArray(this._config.severity)) {
+        const sortedSeverity = [...this._config.severity].sort((a, b) => a.value - b.value);
+        const found = sortedSeverity.find(s => val <= s.value);
+        if (found) color = found.color;
+        else color = sortedSeverity[sortedSeverity.length - 1].color;
+      } 
+      // Individual or global fixed color
+      else if (ent.color) color = ent.color;
       else if (this._globalColor) color = this._globalColor;
+      // Default class-based logic
       else if (deviceClass === 'battery') {
         if (val >= 70) color = '64,191,64';
         else if (val >= 20) color = '191,149,64';
         else color = '191,64,64';
       } 
-      else if (deviceClass === 'humidity' || unit === '%') {
+      else if (deviceClass === 'humidity') {
         if (val >= 70) color = '0,102,204';
         else if (val >= 50) color = '64,191,64';
         else color = '191,149,64';
@@ -97,6 +118,11 @@ class EntityGlassBarCard extends HTMLElement {
         else if (val >= 20) color = '64,191,64';
         else color = '0,128,255';
       } 
+      else if (entityId.startsWith('light.')) {
+        if (val >= 80) color = '255, 255, 200';
+        else if (val >= 40) color = '255, 230, 80';
+        else color = '255, 180, 40';
+      }
       else color = 'var(--accent-color, 128,128,128)';
 
       // 3. ICON LOGIC
@@ -105,6 +131,7 @@ class EntityGlassBarCard extends HTMLElement {
         if (deviceClass === 'humidity') icon = "mdi:water-percent";
         else if (deviceClass === 'battery') icon = "mdi:battery";
         else if (deviceClass === 'temperature') icon = "mdi:thermometer";
+        else if (entityId.startsWith('light.')) icon = "mdi:lightbulb";
         else icon = "mdi:eye";
       }
 
@@ -119,7 +146,7 @@ class EntityGlassBarCard extends HTMLElement {
         for (let i = 1; i < tickCount; i++) {
           const posPx = Math.round((i * step / range) * totalInnerHeight);
           ticksHtml += `
-            <div style="position: absolute; left: 2px; width: 6px; 
+            <div style="position: absolute; left: 0px; width: 6px; 
                         bottom: ${posPx}px; 
                         border-bottom: 1px solid rgba(255,255,255,0.4); 
                         height: 0; z-index: 2; pointer-events: none;"></div>`;
@@ -156,7 +183,7 @@ class EntityGlassBarCard extends HTMLElement {
 
           <!-- Liquid / Fill Level -->
           <div style="position: absolute; bottom: 2px; left: 2px; right: 2px; height: calc(${pct}% - 4px); 
-                      background: linear-gradient(90deg, rgba(0,0,0,0.35) 0%, rgb(${color.startsWith('var') ? '' : color}) ${color.startsWith('var') ? color : ''} 50%, rgba(255,255,255,0.3) 100%); 
+                      background: linear-gradient(90deg, rgba(255,255,255, 0.7) -50%, rgb(${color.startsWith('var') ? '' : color}) ${color.startsWith('var') ? color : ''} 35%, rgba(0,0,0,0.35) 100%); 
                       border-radius: ${pct > 95 ? (pct - 90) * (innerRadius/10) : 0}px ${pct > 95 ? (pct - 90) * (innerRadius/10) : 0}px ${innerRadius}px ${innerRadius}px; 
                       transition: height 1.5s cubic-bezier(0.17, 0.67, 0.83, 0.67); 
                       box-shadow: 0 0 12px rgba(${color.startsWith('var') ? '255,255,255' : color}, 0.25); z-index: 1;">
