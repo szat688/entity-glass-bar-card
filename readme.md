@@ -23,7 +23,7 @@ This card was originally created for personal use to achieve a specific, clean a
 1. Open **HACS** in your Home Assistant.
 2. Go to **Frontend**.
 3. Click the three dots in the top right and select **Custom repositories**.
-4. Paste the URL of this repository and select **Lovelace** as the category.
+4. Paste the URL of this repository and select **Dashboard** as the category.
 5. Click **Add** and then **Download**.
 
 ---
