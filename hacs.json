@@ -1,5 +1,5 @@
 {
   "name": "Entity Glass Bar Card",
-  "render_as_markdown": true,
-  "type": "lovelace"
+  "render_readme": true,
+  "homeassistant": "2023.9.0"
 }
