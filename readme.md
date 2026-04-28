@@ -85,6 +85,7 @@ The `severity` option allows you to change the bar color based on its value. It 
 
 ### Basic Example
 <img width="394" height="325" alt="Image" src="https://github.com/user-attachments/assets/0f935ba7-fc14-4ccb-80a8-26ab250b0f73" />
+
 ```yaml
 type: custom:entity-glass-bar-card
 title: "Temperature and humidity"
@@ -101,6 +102,7 @@ entities:
 
 ### Segmented Battery Style With Charging Indicator (New in v0.2.5)
 <img width="394" height="279" alt="Image" src="https://github.com/user-attachments/assets/2224a876-6854-4a92-b5b8-04fae069ae7e" />
+
 ```yaml
 type: custom:entity-glass-bar-card
 title: Battery level
@@ -127,6 +129,7 @@ entities:
 
 ### Toner level
 <img width="394" height="216" alt="Image" src="https://github.com/user-attachments/assets/f6535fb5-5d87-48f9-83f3-b3a7727482ce" />
+
 ```yaml
 type: custom:entity-glass-bar-card
 title: Printer toner level
