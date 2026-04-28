@@ -4,7 +4,7 @@ A sleek, vertical glass-tube style bar card for Home Assistant.
 
 This card was originally created for personal use to achieve a specific, clean aesthetic on my own dashboard. I decided to share it with the Home Assistant community, hoping that others will find it useful and enjoy the design as much as I do.
 
-<img width="769" height="476" alt="Image" src="https://github.com/user-attachments/assets/c7bcb733-e27e-4e02-b28c-a45a6fc1f009" />
+<img width="510" height="510" alt="Image" src="https://github.com/user-attachments/assets/c46af4bf-a00d-4492-b28c-57a2bdc1c276" />
 
 ---
 
@@ -84,6 +84,7 @@ The `severity` option allows you to change the bar color based on its value. It 
 ## 💡 Example Usage
 
 ### Basic Example
+<img width="394" height="325" alt="Image" src="https://github.com/user-attachments/assets/0f935ba7-fc14-4ccb-80a8-26ab250b0f73" />
 ```yaml
 type: custom:entity-glass-bar-card
 title: "Temperature and humidity"
@@ -98,7 +99,8 @@ entities:
     name: Outdoor hum.
 ```
 
-### Segmented Battery Style With Charging Indicator (New in v0.2.0)
+### Segmented Battery Style With Charging Indicator (New in v0.2.5)
+<img width="394" height="279" alt="Image" src="https://github.com/user-attachments/assets/2224a876-6854-4a92-b5b8-04fae069ae7e" />
 ```yaml
 type: custom:entity-glass-bar-card
 title: Battery level
@@ -124,6 +126,7 @@ entities:
 ```
 
 ### Toner level
+<img width="394" height="216" alt="Image" src="https://github.com/user-attachments/assets/f6535fb5-5d87-48f9-83f3-b3a7727482ce" />
 ```yaml
 type: custom:entity-glass-bar-card
 title: Printer toner level
