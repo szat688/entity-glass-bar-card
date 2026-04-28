@@ -174,7 +174,7 @@ entities:
     name: "Humidity"
 ```
 
-### Combine with auto-entities
+### Combine with [auto-entities](https://github.com/thomasloven/lovelace-auto-entities)
 ```yaml
 card:
   title: Battery
