@@ -4,7 +4,7 @@ A sleek, vertical glass-tube style bar card for Home Assistant.
 
 This card was originally created for personal use to achieve a specific, clean aesthetic on my own dashboard. I decided to share it with the Home Assistant community, hoping that others will find it useful and enjoy the design as much as I do.
 
-<img width="510" height="510" alt="Image" src="https://github.com/user-attachments/assets/c46af4bf-a00d-4492-b28c-57a2bdc1c276" />
+<img width="510" alt="Image" src="https://github.com/user-attachments/assets/c46af4bf-a00d-4492-b28c-57a2bdc1c276" />
 
 ---
 
@@ -22,11 +22,24 @@ This card was originally created for personal use to achieve a specific, clean a
 ## 🛠️ Installation
 
 ### Via HACS (Recommended)
-1. Open **HACS** in your Home Assistant.
-2. Go to **Frontend**.
-3. Click the three dots in the top right and select **Custom repositories**.
-4. Paste the URL of this repository and select **Dashboard** as the category.
-5. Click **Add** and then **Download**.
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=szat688&repository=entity-glass-bar-card&category=plugin)
+
+1. Ensure that [HACS](https://hacs.xyz) is installed in your Home Assistant instance.
+2. Click the button above, **or** add this repository manually:
+   - In HACS, go to **Frontend** → click the three-dot menu (⋮) → **Custom repositories**
+   - Enter `https://github.com` and select **Dashboard** as the category.
+3. Search for "Entity Glass Bar Card" in HACS and click **Download**.
+4. Refresh your browser or restart Home Assistant.
+
+---
+
+### Manual Installation
+
+1. Download the `entity-glass-bar-card.js` file from the [latest release](https://github.com/szat688/entity-glass-bar-card/releases).
+2. Upload the file to your Home Assistant's `www` directory.
+3. Add the resource reference in your Dashboard settings:
+   - **URL:** `/local/entity-glass-bar-card.js`
+   - **Type:** `JavaScript Module`
 
 ---
 
@@ -84,7 +97,7 @@ The `severity` option allows you to change the bar color based on its value. It 
 ## 💡 Example Usage
 
 ### Basic Example
-<img width="394" height="325" alt="Image" src="https://github.com/user-attachments/assets/0f935ba7-fc14-4ccb-80a8-26ab250b0f73" />
+<img width="394" alt="Image" src="https://github.com/user-attachments/assets/0f935ba7-fc14-4ccb-80a8-26ab250b0f73" />
 
 ```yaml
 type: custom:entity-glass-bar-card
@@ -101,7 +114,7 @@ entities:
 ```
 
 ### Segmented Battery Style With Charging Indicator (New in v0.2.5)
-<img width="394" height="279" alt="Image" src="https://github.com/user-attachments/assets/2224a876-6854-4a92-b5b8-04fae069ae7e" />
+<img width="394" alt="Image" src="https://github.com/user-attachments/assets/2224a876-6854-4a92-b5b8-04fae069ae7e" />
 
 ```yaml
 type: custom:entity-glass-bar-card
@@ -128,7 +141,7 @@ entities:
 ```
 
 ### Toner level
-<img width="394" height="216" alt="Image" src="https://github.com/user-attachments/assets/f6535fb5-5d87-48f9-83f3-b3a7727482ce" />
+<img width="394" alt="Image" src="https://github.com/user-attachments/assets/f6535fb5-5d87-48f9-83f3-b3a7727482ce" />
 
 ```yaml
 type: custom:entity-glass-bar-card
