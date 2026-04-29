@@ -31,8 +31,6 @@ This card was originally created for personal use to achieve a specific, clean a
 3. Search for "Entity Glass Bar Card" in HACS and click **Download**.
 4. Refresh your browser or restart Home Assistant.
 
----
-
 ### Manual Installation
 
 1. Download the `entity-glass-bar-card.js` file from the [latest release](https://github.com/szat688/entity-glass-bar-card/releases).
