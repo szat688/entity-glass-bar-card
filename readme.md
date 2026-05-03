@@ -10,12 +10,16 @@ This card was originally created for personal use to achieve a specific, clean a
 
 ## ✨ Features
 *   **Glassmorphism Design:** Realistic glass effect with highlights, depth, and reflections.
+*   **Smart Color Interpolation (New):** Fluid color transitions that blend smoothly as values change, instead of abrupt jumps.
+*   **Flexible Grid Layout (New):** Use the `columns` option for precise grid-based alignment.
+*   **Intelligent Labeling:** Value labels automatically center themselves if names and icons are hidden — perfect for compact toner views.
 *   **Segmented Layout:** Option to display bars as discrete blocks, perfect for battery or level indicators.
-*   **Smart Snapping:** In segmented mode, the fill level automatically snaps to the top of the nearest block.
+*   **Charging Animations:** Integrated support for battery charging states with a pulsing glow effect.
 *   **Smart Colors:** Automatic color logic for `temperature`, `humidity`, `battery` and `light` device classes.
 *   **Vertical Space Saving:** Uses rotated labels and icons to maximize information density.
 *   **Precision Ticks:** Mathematically aligned measurement ticks.
 *   **Interactive:** Built-in tap-action to open the "More Info" dialog for each entity.
+*   **Unit System Awareness:** Automatically detects and scales for Celsius or Fahrenheit based on your HA configuration.
 
 ---
 
@@ -51,19 +55,19 @@ This card was originally created for personal use to achieve a specific, clean a
 | `type` | string | **Required** | `custom:entity-glass-bar-card` |
 | `entities` | list | **Required** | List of entities to display. |
 | `title` | string | optional | Title of the card. |
+| `columns` | number | `null` | Force a specific number of columns (Grid Layout). |
 | `height` | number | `200` | Total height of the bars in pixels. |
 | `width` | number | `40` | Width of each bar in pixels. |
 | `radius` | number | `20` | Border radius for the bars. |
 | `color` | string | `null` | Global RGB color (e.g., `255, 165, 0`) or CSS variable (e.g., `var(--primary-color)`). |
 | `step` | number | `null` | Global tick interval (defaults: 5 for temperature, 10 for others). |
 | `segmented` | boolean | `false` | Enable segmented/blocked layout globally. |
-| `severity` | list | optional | Global dynamic color thresholds (see Severity section). |
+| `severity` | list | optional | Global dynamic color thresholds with smooth interpolation. (see Severity section). |
 | `show_ticks` | boolean | `true` | Show or hide measurement ticks. |
 | `show_name` | boolean | `true` | Show or hide entity names. |
 | `show_icon` | boolean | `true` | Show or hide entity icons. |
 | `show_value` | boolean | `true` | Show or hide current values. |
 | `decimals` | number | HA default | Number of decimal places to show. |
-| `segmented` | boolean | `false` | Enable stepped/segmented bar appearance. |
 | `unit` | string | `null` | Global unit override for all entities. |
 | `icon` | string | `null` | Global icon override for all entities. |
 
@@ -77,17 +81,17 @@ This card was originally created for personal use to achieve a specific, clean a
 | `unit` | string | null | Custom unit override (e.g., `hPa`). |
 | `decimals` | number | null | Entity-specific decimal precision. |
 | `step` | number | null | The interval between ticks or segments (e.g., 5). |
-| `min` | number | 0 / -5 | Minimum scale value (defaults: -5 for temp, 0 for others). |
-| `max` | number | 35 / 100 | Maximum scale value (defaults: 35 for temp, 100 for others). |
+| `min` | number | -5 / 23 / 0 | Minimum scale value (defaults: -5 for Celsius, 23 for Fahrenheit, 0 for others). |
+| `max` | number | 35 / 95 / 100 | Maximum scale value (defaults: 35 for Celsius, 95 for Fahrenheit, 100 for others). |
 | `charging_entity` | string | null | Binary sensor to trigger charging animation. |
 | `color` | string | null | Static RGB color (e.g., `255, 100, 0`). |
 
 ### Severity Options
-The `severity` option allows you to change the bar color based on its value. It can be defined globally.
+The `severity` option allows you to change the bar color based on its value, colors interpolate smoothly between thresholds. It can be defined globally.
 
 | Name | Type | Description |
 | :--- | :--- | :--- |
-| value | number | The threshold value (color applied if state is less than or equal to this). |
+| value | number | The threshold value. |
 | color | string | RGB color or CSS variable. |
 
 ---
@@ -95,7 +99,7 @@ The `severity` option allows you to change the bar color based on its value. It 
 ## 💡 Example Usage
 
 ### Basic Example
-<img width="394" alt="Image" src="https://github.com/user-attachments/assets/0f935ba7-fc14-4ccb-80a8-26ab250b0f73" />
+<img width="367" alt="Image" src="https://github.com/user-attachments/assets/8d6a686d-5a08-41ae-b24f-f3cfeba35ef0" />
 
 ```yaml
 type: custom:entity-glass-bar-card
@@ -112,7 +116,7 @@ entities:
 ```
 
 ### Segmented Battery Style With Charging Indicator (New in v0.2.5)
-<img width="394" alt="Image" src="https://github.com/user-attachments/assets/2224a876-6854-4a92-b5b8-04fae069ae7e" />
+<img width="367" alt="Image" src="https://github.com/user-attachments/assets/a52d992d-52d8-473f-a7bf-9269b1e39138" />
 
 ```yaml
 type: custom:entity-glass-bar-card
@@ -139,7 +143,7 @@ entities:
 ```
 
 ### Toner level
-<img width="394" alt="Image" src="https://github.com/user-attachments/assets/f6535fb5-5d87-48f9-83f3-b3a7727482ce" />
+<img width="367" alt="Image" src="https://github.com/user-attachments/assets/8e6d3caa-5c9e-4817-846e-289e58626322" />
 
 ```yaml
 type: custom:entity-glass-bar-card
@@ -150,6 +154,28 @@ show_name: false
 width: 70
 height: 100
 radius: 1
+entities:
+  - entity: sensor.toner_cyan
+    color: 0,255,255
+  - entity: sensor.toner_magenta
+    color: 255,0,255
+  - entity: sensor.toner_yellow
+    color: 255,255,0
+  - entity: sensor.toner_black
+    color: 0,0,0
+```
+
+<img width="367" alt="Image" src="https://github.com/user-attachments/assets/c1cd0ffc-52cc-4306-ba10-8a06c3bd8168" />
+
+```yaml
+type: custom:entity-glass-bar-card
+title: Printer toner level
+show_ticks: false
+show_icon: false
+show_name: false
+width: 65
+height: 65
+radius: 32
 entities:
   - entity: sensor.toner_cyan
     color: 0,255,255
