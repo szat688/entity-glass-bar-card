@@ -1,0 +1,16 @@
+# 🚀 Release Notes - v0.40.2
+
+## 💎 The Smart & Smooth Update
+
+This version introduces significant code optimization and visual refinements. The core logic has been rewritten for better performance and a more premium aesthetic.
+
+### ✨ New Features
+- 🌈 **Smart Color Interpolation**: Smooth color transitions based on values instead of abrupt changes.
+- 📐 **Grid Layout Support**: New global `columns` option for precise, grid-based alignment of your bar cards.
+- ⚡ **Performance Boost**: Re-engineered "Smart Update" logic that only refreshes changed elements, significantly reducing CPU usage.
+
+### 🎨 Visual Improvements
+- 🧊 **Refined Glass Aesthetics**: Fully restored and improved reflections, internal glows, and depth shadows.
+- 📏 **Smart Labels**: Value labels now automatically center themselves when names and icons are disabled (perfect for compact views).
+- 🔠 **Enhanced Typography**: Stronger text shadows and optimized font weights for perfect readability against any background.
+- 🌊 **Improved Fluid Logic**: Refined corner rounding for the liquid fill to ensure it follows the tube curve perfectly at high levels.
