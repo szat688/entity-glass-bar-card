@@ -1,5 +1,5 @@
 /**
- * EntityGlassBarCard - v0.40.2
+ * EntityGlassBarCard - v0.40.3
  * A vertical, glass-style bar card for Home Assistant
  */
  
